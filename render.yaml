@@ -13,3 +13,19 @@ services:
     name: rabbitmq
     mountPath: /var/lib/rabbitmq
     sizeGB: 10
+
+- type: tcp
+  name: rabbitmq-amqp
+  env: docker
+  envVars:
+    - key: RABBITMQ_ERLANG_COOKIE
+      generateValue: true
+    - key: RABBITMQ_DEFAULT_USER
+      value: rabbitmq
+    - key: RABBITMQ_DEFAULT_PASS
+      generateValue: true
+  disk:
+    name: rabbitmq
+    mountPath: /var/lib/rabbitmq
+    sizeGB: 10
+  internalPort: 5672
