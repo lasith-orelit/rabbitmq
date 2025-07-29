@@ -1,15 +1,20 @@
 services:
-- type: web
-  name: rabbitmq
-  env: docker
-  envVars:
-  - key: RABBITMQ_ERLANG_COOKIE
-    generateValue: true
-  - key: RABBITMQ_DEFAULT_USER
-    value: rabbitmq
-  - key: RABBITMQ_DEFAULT_PASS
-    generateValue: true
-  disk:
+  - type: web
     name: rabbitmq
-    mountPath: /var/lib/rabbitmq
-    sizeGB: 10
+    env: docker
+    envVars:
+      - key: RABBITMQ_ERLANG_COOKIE
+        generateValue: true
+      - key: RABBITMQ_DEFAULT_USER
+        value: rabbitmq
+      - key: RABBITMQ_DEFAULT_PASS
+        generateValue: true
+    disk:
+      name: rabbitmq
+      mountPath: /var/lib/rabbitmq
+      sizeGB: 10
+    ports:
+      - port: 15672
+        protocol: tcp
+      - port: 5672
+        protocol: tcp
